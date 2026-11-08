@@ -2,24 +2,27 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Categorie;
+use App\Models\Publication;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $cat1 = Categorie::create(['nom' => 'Vidéo', 'slug' => 'video']);
+        $cat2 = Categorie::create(['nom' => 'Audio', 'slug' => 'audio']);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        Publication::create([
+            'titre' => 'Vidéo éducative',
+            'contenu' => 'Explication des bases de Laravel',
+            'categorie_id' => $cat1->id
+        ]);
+
+        Publication::create([
+            'titre' => 'Podcast technologique',
+            'contenu' => 'Les dernières tendances du web',
+            'categorie_id' => $cat2->id
         ]);
     }
 }
